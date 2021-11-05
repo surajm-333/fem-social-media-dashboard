@@ -1,0 +1,7 @@
+// Here we have used a wildcard(*) namespace. But namespacing can be used in case of conflicting styles (vars/mixins
+// from different styles having same names) or when we are importing styles from a library.
+@use '../util/' as *;
+
+.card {
+    padding: rem(20);
+}

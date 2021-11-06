@@ -5,11 +5,19 @@
 .toggle {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: rem(12);
+    grid-gap: rem(5) rem(12);
     place-items: center;
     border: none;
+    max-width: rem(240);
+    margin: auto;
+
+    @include breakpoint(medium) {
+        margin: 0;
+    }
 
     label {
+        font-size: rem(14);
+        cursor: pointer;
         &[for="dark"] {
             order: 1;
             place-self: center end;
@@ -29,10 +37,20 @@
         display: inline-block;
         position: relative;
         order: 2;
+        cursor: pointer;
     }
 
     input[type="radio"] {
+        position: relative;
+        cursor: pointer;
         opacity: 0;
+        margin: 0;
+        width: rem(18);
+        height: rem(24);
+
+        &:focus ~ .toggle__button {
+            border: 2px solid var(--instagram-start);
+        }
     }
 
     &__background {
@@ -44,12 +62,32 @@
         width: 100%;
         border-radius: rem(12);
         background: linear-gradient(225deg, var(--toggle-bg-end) 0%, var(--toggle-bg-start) 98.02%);
+        pointer-events: none;
     }
 
     &__button {
-        width: rem(16);
-        height: rem(16);
+        position: absolute;
+        top: rem(3);
+        left: rem(3);
+        background: var(--dark-bg);
+        width: rem(18);
+        height: rem(18);
         border-radius: 50%;
         color: var(--toggle);
+        transition: all 0.2s ease;
     }
+
+    &__button:focus {
+        border: 2px solid blue;
+    }
+
+    #light:checked ~ &__button {
+        left: calc(100% - 21px);
+    }    
+    
+    #system:checked ~ &__button {
+        // left: calc(50% - 9px);
+        left: 50%;
+        transform: translateX(-50%);
+    }    
 }
